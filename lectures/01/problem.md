@@ -86,7 +86,6 @@ GitHub の自分の fork で、`lec01` → `main` の PR を作成します。**
 | 発展 | 応答時間とトークン数を計測し、複数のモデルや質問で比較する。無料枠のレート制限との関係も考察する |
 
 モデルの切り替え例：
-
 ```bash
 AIE_MODEL=gemini-3.5-flash uv run python -m app.ask "LoRAとは何ですか？"
 ```
