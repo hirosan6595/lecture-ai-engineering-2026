@@ -83,27 +83,7 @@ uv run --with streamlit==1.66.1 streamlit run tools/annotate.py
 uv run python -m app.judge --compare lectures/04/reference/labels_instructor.jsonl
 ```
 
-### STEP 2：LLM に採点させ、一致率を見る（約5分）
-
-```bash
-uv run python -m app.judge
-```
-
-10 件 × 1 回ずつ LLM を呼びます（1 分ほど）。採点のプロンプトは `data/eval/rubric.md` にあり、全文読めます。`app/judge.py` は、基準ごとに理由を先に書かせてから T / F / unsure を出させる構造化出力で、temperature は 0 です。
-
-出力の読み方：
-
-- **基準別の一致率**：自分のラベルと LLM の判定が一致した件数。LLM が unsure にした項目は分母から外れます
-- **総合の一致率**と、自動判定できた割合（coverage）
-- **要確認**：LLM が unsure にした項目と、その理由
-- **不一致**：見逃し（LLM は合格、自分は不合格）と過検出（その逆）、LLM が書いた理由
-
-まず「分かりやすさ」の一致率が低いことを確認してください。主観的な基準は人同士でも割れるので、LLM と割れるのも当然です。次に要確認の項目を見ます。STEP 3 でここを直します。
-
-- 「レート制限に達しました」と出たら、1 分待って再実行します。続くときは `--wait 2`（1 件ごとに 2 秒待つ）を付けます
-- API キーが使えないときや動作確認だけしたいときは、`--model test` を付けると、API を呼ばずに簡単な規則で判定する偽モデルで流れを試せます（本物の採点ではありません）
-
-結果は `lectures/04/judge_result.json` に保存されます。
+### STEP 2
 
 ### STEP 3：基準を 1 か所直して、もう一度採点する（約8分）
 
